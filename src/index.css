@@ -1,0 +1,359 @@
+@font-face {
+  font-family: "Overused Grotesk";
+  src: url('https://raw.githubusercontent.com/RandomMaerks/Overused-Grotesk/master/fonts/variable/OverusedGroteskRoman-VF.ttf');
+  font-weight: 300 900;
+}
+
+:root {
+  --bg-color: #FFFFFF;
+  --text-color: #000000;
+  --text-secondary: #666666;
+  --accent-color: #1BE054;
+  --font-main: 'Overused Grotesk', system-ui, Avenir, Helvetica, Arial, sans-serif;
+  --spacing-unit: 1rem;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-main);
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  line-height: 1.2;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+/* --- Layout --- */
+.main-layout {
+  min-height: 100vh;
+  padding: 2rem 3rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  margin-bottom: 2rem;
+  text-transform: uppercase;
+}
+
+.audio-input {
+  /* padding-right: 7.5rem; */
+}
+
+.content-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  flex: 1;
+  gap: 2rem;
+  position: relative;
+  align-items: center;
+  width: 100%;
+}
+
+/* --- Hero Section (Left) --- */
+.hero-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  z-index: 10;
+}
+
+.hero-eyebrow {
+  font-size: 0.8rem;
+  line-height: 1.4;
+  max-width: 350px;
+  /* Expanded */
+  margin-bottom: 2rem;
+  color: var(--text-secondary);
+}
+
+.hero-title {
+  font-size: clamp(3rem, 7vw, 7.5rem);
+  /* Slightly adjusted */
+  font-weight: 500;
+  letter-spacing: -0.04em;
+  line-height: 0.75;
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+  white-space: nowrap;
+}
+
+.hero-subtitle {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  opacity: 0.8;
+  font-weight: 400;
+}
+
+/* --- Right Column (Blobs) --- */
+.dynamic-section {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  min-height: 500px;
+}
+
+/* Always Visible Blobs */
+.active-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* Ensure visibility always */
+  opacity: 1 !important;
+  transform: scale(1) !important;
+  pointer-events: auto;
+}
+
+/* --- Bottom Controls --- */
+.bottom-controls {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem 0;
+  /* Add padding */
+  z-index: 20;
+  /* Ensure on top */
+  position: relative;
+}
+
+.custom-widget-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.convai-btn {
+  border: 1px solid var(--text-color);
+  border-radius: 999px;
+  padding: 1rem 3rem;
+  font-size: 1rem;
+  background: transparent;
+  color: var(--text-color);
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  letter-spacing: 0.05em;
+}
+
+.convai-btn:hover {
+  background: var(--text-color);
+  color: var(--bg-color);
+}
+
+
+/* --- Reactive Blobs --- */
+.blobs-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.blob-group {
+  position: relative;
+  width: 450px;
+  /* Larger blobs */
+  height: 450px;
+}
+
+.blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  mix-blend-mode: multiply;
+}
+
+.blob-1 {
+  width: 350px;
+  height: 350px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #1be054;
+  opacity: 0.8;
+  /* More visible always */
+}
+
+.blob-2 {
+  width: 300px;
+  height: 300px;
+  top: 45%;
+  left: 55%;
+  transform: translate(-50%, -50%);
+  background: #4ade80;
+  opacity: 0.7;
+}
+
+/* --- Papyrus Overlay --- */
+.papyrus-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.9);
+  opacity: 0;
+  transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  width: clamp(320px, 25vw, 600px);
+  /* Fluid width for large screens */
+  z-index: 50;
+  pointer-events: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.papyrus-overlay.visible {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.papyrus-overlay img {
+  width: 100%;
+  height: auto;
+  filter: grayscale(100%) contrast(1.1) drop-shadow(0 20px 30px rgba(0, 0, 0, 0.1));
+}
+
+
+/* --- Animations --- */
+.animate-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  transition-delay: calc(var(--i) * 0.1s);
+}
+
+.animate-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* --- Responsive --- */
+@media (max-width: 768px) {
+
+  .content-grid {
+    grid-template-columns: 1fr;
+    margin-bottom: 2rem;
+  }
+
+  .dynamic-section {
+    min-height: 300px;
+    /* Smaller on mobile */
+  }
+
+  .blob-group {
+    width: 300px;
+    height: 300px;
+  }
+
+  .blob {
+    filter: blur(40px);
+  }
+
+  .blob-1 {
+    width: 200px;
+    height: 200px;
+  }
+
+  .blob-2 {
+    width: 150px;
+    height: 150px;
+  }
+
+  .main-layout {
+    padding: 1rem;
+    align-items: center;
+    /* Center main column */
+  }
+
+  .hero-section {
+    align-items: center;
+    text-align: center;
+  }
+
+  .top-bar {
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    text-align: center;
+  }
+
+  .hero-eyebrow {
+    max-width: 100%;
+  }
+
+  .hero-subtitle {
+    font-size: 1rem;
+  }
+
+  /* Adjust 3D scene on mobile */
+  .scene-container {
+    min-height: 300px;
+  }
+}
+
+/* --- Tablet Responsive (New) --- */
+@media (max-width: 1024px) {
+  .main-layout {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+  }
+
+
+  .content-grid {
+    gap: 1.5rem;
+  }
+
+  .hero-title {
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    white-space: normal;
+  }
+
+  .hero-title br {
+    display: none;
+  }
+
+  .hero-eyebrow br {
+    display: none;
+  }
+
+  .hero-eyebrow {
+    white-space: normal;
+  }
+}
+
+/* Base Scene Container */
+.scene-container {
+  width: 100%;
+  height: 100%;
+  min-height: 400px;
+}
