@@ -237,7 +237,7 @@ body {
 .papyrus-overlay img {
   width: 100%;
   height: auto;
-  filter: grayscale(100%) contrast(1.1) drop-shadow(0 20px 30px rgba(0, 0, 0, 0.1));
+  filter: contrast(1.1) drop-shadow(0 20px 30px rgba(0, 0, 0, 0.1));
 }
 
 
@@ -348,6 +348,7 @@ body {
 
   .hero-eyebrow {
     white-space: normal;
+    font-size: 0.75rem;
   }
 }
 
